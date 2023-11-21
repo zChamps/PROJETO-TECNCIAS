@@ -8,14 +8,16 @@ import javax.swing.JFrame;
 public class Principal extends JFrame
 	implements MouseMotionListener {
 	
-	private ImagemMovida aviao;
+	private Espada espada;
+	private Fruta fruta;
 	private Imagem background;
 	private Thread threadImgMovida;
+	private ToqueException excecaoToque;
+	private int pontuacaoJogo = 0;
 
 	private static final int Width = 1300;
     private static final int Height = 700;
 
-	private AviaoAnimado aviao2;
 	
 	public Principal() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,24 +26,24 @@ public class Principal extends JFrame
 		threadImgMovida = new Thread();
 		threadImgMovida.start();
 	
-		aviao = new AviaoMovido(Width, Height);
-		aviao2 = new AviaoAnimado();
+		espada = new Espada(Width, Height);
+		fruta = new Fruta();
 		background = new Imagem();
 		
-		aviao.setX(50);
-		aviao.setY(300);
-		aviao.setImg("aviao.png");
+		espada.setX(50);
+		espada.setY(300);
+		espada.setImg("espada.png");
 		
 		
 		
-		aviao2.setX(50);
-		aviao2.setY(60);
-		aviao2.setImg("aviao.png");
+		fruta.setX(50);
+		fruta.setY(60);
+		fruta.setImg("fruta.png");
 		
 		
 		background.setX(0);
 		background.setY(0);
-		background.setImg("background image.jpeg");
+		background.setImg("cenario.png");
 		
 	}
 
@@ -52,12 +54,20 @@ public class Principal extends JFrame
 	
 	//ESSE EH O METODO QUE DEVE SER ADAPTADO AO PROJETO
 	public void renderizarImagens(Graphics g2) {
-		//Desenhando as imagens
-		background.desenhar(g2);
-		g2.drawImage(background.getImg(), 0, 0, getWidth(), getHeight(), null);
-		aviao.desenhar(g2);
-		aviao2.desenhar(g2);
-		if(aviao.getRectangle().intersects(aviao2.getRectangle()));
+		
+		try {
+			//Desenhando as imagens
+			background.desenhar(g2);
+			g2.drawImage(background.getImg(), 0, 0, getWidth(), getHeight(), null);
+			espada.desenhar(g2);
+			fruta.desenhar(g2);
+			if(espada.intercepta(fruta)) {
+			throw excecaoToque(pontuacaoJogo);
+		}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 	
 	//EVITAR ALTERAR ESSE METODO
@@ -96,95 +106,6 @@ public class Principal extends JFrame
 	@Override
     public void mouseMoved(MouseEvent e)
     {
-        AviaoMovido.SetTarget(e.getX(), e.getY());
+        Espada.SetTarget(e.getX(), e.getY() - 170);
     }
-	// @Override
-	// public void run() {
-
-	// 	MouseEvent e
-    // 	while (true) {
-    //     if(e.getX() > aviao.getX()) {
-	// 		aviao.moverDireita(1);			
-	// 	}
-	// 	else {
-	// 		aviao.moverEsquerda(1);			
-	// 	}
-		
-	// 	if(e.getY() > aviao.getY()) {
-	// 		aviao.moverBaixo(1);			
-	// 	}
-	// 	else {
-	// 		aviao.moverCima(1);			
-	// 	}
-    //     try {
-    //         Thread.sleep(100); // ou qualquer intervalo desejado
-    //     } catch (InterruptedException e) {
-    //         e.printStackTrace();
-    //     }
-    // }
 }
-
-
-	// while(true){
-
-	// 	MouseEvent e;
-	// 	if(e.getX() > aviao.getX()) {
-	// 		aviao.moverDireita(1);			
-	// 	}
-	// 	else {
-	// 		aviao.moverEsquerda(1);			
-	// 	}
-		
-	// 	if(e.getY() > aviao.getY()) {
-	// 		aviao.moverBaixo(1);			
-	// 	}
-	// 	else {
-	// 		aviao.moverCima(1);			
-	// 	}
-	// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	// public void mouseMoved(MouseEvent e) {
-	// 	System.out.println("[" + e.getX() + ";" + e.getY() + "]");
-		
-	// 	if(e.getX() > aviao.getX()) {
-			
-	// 			try {
-	// 				if(aviao.getX() > getWidth() - 250){
-	// 					throw new PosicaoInvalidaException();
-	// 				}
-	// 				aviao.moverDireita(1);
-					
-	// 			} catch (PosicaoInvalidaException e1) {
-					
-	// 				System.out.println("Posição Inválida");
-	// 			}
-			
-			
-						
-	// 	}
-	// 	else {
-	// 		aviao.moverEsquerda(1);			
-	// 	}
-		
-	// 	if(e.getY() > aviao.getY()) {
-	// 		aviao.moverBaixo(1);			
-	// 	}
-	// 	else {
-	// 		aviao.moverCima(1);			
-	// 	}
-	// }

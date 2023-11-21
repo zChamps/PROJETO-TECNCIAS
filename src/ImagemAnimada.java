@@ -10,8 +10,10 @@ public class ImagemAnimada extends ImagemMovida implements Runnable {
           while(true) {
             if (this.getX() > 1300){
                 this.setX(this.getImg().getWidth());
+                System.out.println("em cima");
             } else {
-                this.setX(this.getX() + 10);
+                this.setX(this.getX() + 50);
+                System.out.println("em baixo");
             }
 
             try{

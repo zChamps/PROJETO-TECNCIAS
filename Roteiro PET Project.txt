@@ -1,0 +1,35 @@
+PET-Project Técnicas
+
+1) Criar uma classe concreta que herde da ImagemMovida e represente algo que você queira manipular. Exemplo: avião, nave, bola, cachorro, trem onibus, etc... Em seguida, substitua na Principal o tipo ImagemMovida pelo tipo que você criou. Baixe uma nova imagem na Internet para substituir a imagem do carro.
+2) Escolha e desenha uma paisagem, um fundo para a sua tela. Uma pista, um campo, o céu, etc. Use o tipo Imagem.
+3) Criar uma outra classe concreta que herde de ImagemAnimada e represente algo que será movimentada automaticamente. Baixe uma nova imagem na Internet para esta classe.
+3.1) Você precisará implementar o método run() nesta classe. Esse método vai definir o comportamento.
+
+private Thread t = new Thread(this);
+	
+public MinhaImagemAnimada() {
+	t.start();
+}
+
+public void run() {
+  while(true) {
+    this.setX(this.getX() + 10);
+    try {
+	t.sleep(500);
+    } catch (InterruptedException e) {
+	e.printStackTrace();
+    }
+  }
+}
+4) Pensem sobre a questão do movimento. A imagem deve continuar se aproximando do mouse, mesmo com o mouse parado.
+
+ATIVIDADE AVALIATIVA:
+5) Criar uma exceção para imprimir uma mensagem na tela caso a imagem a ser movida pelo mouse chegue até a margem direita da tela.
+5.1) Crie uma classe chamada PosicaoInvalidaException que herde de Exception
+5.2) No método moverDireita() da classe ImagemMovida, lance (throw) a exceção acima (5.1) caso a imagem se mova até o limite direito da tela.
+5.3) Na classe Principal trate (try/catch) a exceção lançada acima (5.2) imprimindo a mensagem "Posição Inválida!"
+
+6) Adicionar uma ação a ser executada quando dois objetos se interceptam. Para isso, determine algo a ser feito por alguma das imagens. Exemplo: mudar a posição de uma delas, mudar o sentido de deslocamento, etc. Exigência: a imagem de um dos objetos deve ser modificado (use setImg)
+6.1) Crie uma classe que herde de Exception e represente o que vpcê deseja que ocorra quando os dois objetos se encontram.
+6.2) No if que chama o método intercepta na classe Principal, substitua o System.out.println("Carros se tocaram!") pelo lançamento (throw) da exceção acima (6.1).
+6.3) Na classe Principal trate (try/catch) a exceção lançada acima (6.2) implementando a ação planejado por você (no catch).
