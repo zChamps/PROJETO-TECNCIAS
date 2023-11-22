@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.nio.file.Path;
 
 import javax.swing.JFrame;
 
@@ -29,6 +30,7 @@ public class Principal extends JFrame
 		espada = new Espada(Width, Height);
 		fruta = new Fruta();
 		background = new Imagem();
+		excecaoToque = new ToqueException();
 		
 		espada.setX(50);
 		espada.setY(300);
@@ -61,11 +63,13 @@ public class Principal extends JFrame
 			g2.drawImage(background.getImg(), 0, 0, getWidth(), getHeight(), null);
 			espada.desenhar(g2);
 			fruta.desenhar(g2);
+			fruta.setImg("fruta.png");
 			if(espada.intercepta(fruta)) {
-			throw excecaoToque(pontuacaoJogo);
+			throw excecaoToque;
 		}
 		} catch (Exception e) {
-			// TODO: handle exception
+			fruta.setImg("explosao.png");
+			// fruta.setY(fruta.getY() - 10); 
 		}
 		
 	}

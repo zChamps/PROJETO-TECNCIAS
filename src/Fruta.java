@@ -21,7 +21,7 @@ public class Fruta extends ImagemAnimada {
                 // System.out.println("em cima");
             } else {
                 this.setX(this.getX() + 5);
-                System.out.println(this.getX());
+                // System.out.println(this.getX());
             }
 
             try{
