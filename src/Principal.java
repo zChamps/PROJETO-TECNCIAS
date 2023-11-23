@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.nio.file.Path;
+
 
 import javax.swing.JFrame;
 
@@ -14,7 +14,6 @@ public class Principal extends JFrame
 	private Imagem background;
 	private Thread threadImgMovida;
 	private ToqueException excecaoToque;
-	private int pontuacaoJogo = 0;
 
 	private static final int Width = 1300;
     private static final int Height = 700;

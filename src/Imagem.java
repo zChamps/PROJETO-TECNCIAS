@@ -1,7 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
@@ -41,11 +41,14 @@ public class Imagem {
 
 	//EVITAR ALTERAR ESSE METODO
 	public void setImg(String path) {
-		File fileImg = new File(path);
-		try { img = ImageIO.read(fileImg); 
-			rectangle.width = img.getWidth();
-			rectangle.height = img.getHeight();}
-		catch (IOException e) {
+		try (var fileStream = new FileInputStream(path)) {
+			try { img = ImageIO.read(fileStream); 
+				rectangle.width = img.getWidth();
+				rectangle.height = img.getHeight();}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
